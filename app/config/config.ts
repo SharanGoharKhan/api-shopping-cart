@@ -8,7 +8,8 @@ const configs = {
             name: 'shopping-cart'
         },
         port: 3000,
-        db: 'mongodb://127.0.0.1:27017/shopping_cart'
+        db: 'mongodb://127.0.0.1:27017/shopping_cart',
+        host: '127.0.0.1'
     }
 }
 export const config = configs['development'];

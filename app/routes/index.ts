@@ -14,7 +14,10 @@ var userObj = new User();
 
 /* ------- Intializing objects ------------ */
 const router = express.Router();
-
+/* API is working route */
+router.get('/',function(req,res){
+    res.sendFile(__dirname + '/index.html');
+});
 /*  Users apis */
 router.get('/users/getAllUsers',userObj.getUsers);
 

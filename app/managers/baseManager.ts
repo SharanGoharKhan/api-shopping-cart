@@ -16,6 +16,7 @@ export class Manager {
         let cipher:any = crypto.createCipher('aes-256-ctr',constant_configs.app_hash_key);
         let crypted:any = cipher.update(value,'utf8','hex');
         crypted += cipher.final('hex');
+        return crypted;
     }
 
     /* Decrypt the given value */
@@ -69,7 +70,7 @@ export class Manager {
     */
     static add(table:any,object:any){
         return new Promise(function(resolve,reject){
-            object.save(function(err,result){
+            table.save(function(err,result){
                 err ? reject(err) :resolve(result);
             })
         })

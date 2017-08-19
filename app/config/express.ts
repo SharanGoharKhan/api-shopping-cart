@@ -7,6 +7,7 @@ import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import { routes } from '../routes/index';
 import * as methodOverride from 'method-override';
+import * as logger from 'morgan';
 module.exports = function(app, config) {
     /* ---- Intialize bodyParse used for form post request ----- */
     app.use(bodyParser.json());
@@ -20,6 +21,8 @@ module.exports = function(app, config) {
         res.header("Pragma", "no-cache");
         next();
     });
+    /* Used for logging request */
+    app.use(logger('dev'));
     /* ---- Method override package will give accecss to put and delete verbs where it's not supported ---- */
     app.use(methodOverride());
     /*---- Intialize routes ------ */

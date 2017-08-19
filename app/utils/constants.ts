@@ -3,7 +3,11 @@
    Author: Sharan Khan
 */
 let constants: any = {
-    app_hash_key: 'TmWf-Task0043-Secure!!321Link'
+    app_hash_key: 'TmWf-Task0043-Secure!!321Link',
+    jwt_secret_key: 'RYIhsd76KJHLKK900HNHGHJHJdfh7412UIQZX0765KJtjdfsdf7000332',
+    public_urls: [
+        '/user/signup'
+    ]
 }
 
 export const constant_configs = constants;

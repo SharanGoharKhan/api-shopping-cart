@@ -23,5 +23,6 @@ router.get('/',function(req,res){
 /*  Users apis */
 router.get('/users/getAllUsers',userObj.getUsers);
 router.post('/user/signup',userObj.addUser);
+router.post('/user/login',userObj.userLogin);
 
 export const routes = router;

@@ -7,6 +7,7 @@ import { UserManager } from '../managers/users';
 import { Users } from '../models/users';
 import * as jwt from 'jsonwebtoken';
 import { constant_configs } from '../utils/constants';
+import *  as async from 'async';
 /* ---------- APIS ------------- */
 export class User {
     constructor() {
@@ -25,6 +26,7 @@ export class User {
     }
     /*  Create User
         Method: POST
+        Response: User Info, Token, User ID
     */
     addUser(req:any,res:any) {
         let userInfo = req.body;
@@ -37,12 +39,37 @@ export class User {
             var token = jwt.sign(data,constant_configs.jwt_secret_key,{
                expiresIn: 60 * 60 * 24 // expires in 24 hours
             });
-            return res.status(200).json({data,token:token});
+            return res.status(200).json({data,token:token,success:true});
         })
         .catch(err =>
         {
             console.log("error",err);
             return res.status(500).json({err});
         });
-    } 
+    }
+    /*  Login User
+        Method: POST
+        Request: Email, Password
+        Response: User data and a token
+    */
+    userLogin(req,res) {
+        let userInfo = req.body;
+        userInfo.password = UserManager.encryptText(userInfo.password);
+        console.log(userInfo.email);
+        UserManager.findOne(Users,{email:userInfo.email})
+        .then(data =>{
+            if(data == null || data == undefined || data == '')
+                return res.status(404).json({error: 'Error occured while getting users.',success:'false'})
+            else
+            {
+                var token = jwt.sign(data,constant_configs.jwt_secret_key,{
+                    expiresIn: 60 * 60 *24 //expires in 25 hours
+                });
+                return res.status(200).json({data,token:token,success:true});
+            }
+        })
+        .catch(err=>{
+            return res.status(500).json({error:err,success:false});
+        })
+     }    
 }

@@ -3,13 +3,13 @@
     Author: Sharan
 */
 
-import { UserManager } from '../managers/users';
-import { Users } from '../models/users';
 import * as jwt from 'jsonwebtoken';
 import { constant_configs } from '../utils/constants';
 import *  as async from 'async';
+import { Users } from '../models/usersModel';
+import { UserManager } from '../managers/usersManager';
 /* ---------- APIS ------------- */
-export class User {
+export class UserController {
     constructor() {
     }
     /*  Get all users list 

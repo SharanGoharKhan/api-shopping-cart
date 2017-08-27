@@ -6,7 +6,8 @@
 */
 
 import { Manager } from './baseManager';
-import * as Users from '../models/users';
+import { Users } from '../models/usersModel';
+
 export class UserManager extends Manager {
     constructor(){
         super();
